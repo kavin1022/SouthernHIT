@@ -1,4 +1,4 @@
-function hideDiv(divID) {
+const hideDiv =(divID) => {
 	let x = document.getElementById(divID.id);
 
 	//hide all block except for button block
@@ -12,4 +12,8 @@ function hideDiv(divID) {
 	}
 
 	x.style.display = "block";
+}
+
+const getAllStaff = () => {
+	console.log("https://cws.auckland.ac.nz/335a3/api/GetAllStaff");
 }

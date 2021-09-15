@@ -6,3 +6,15 @@
     justify-content: space-evenly;
     width: 50vw;
 }
+
+.staffWrapper{
+    display: none;
+}
+
+
+/*
+.instituteShopWrapper
+.userRegWrapper
+.guestBookWrapper{
+    display: none;
+}*/
