@@ -9,17 +9,17 @@
 	<link rel="stylesheet" href="pfan450.css">
 </head>
 
-<body>
+<body>	
 		<header>
-				<img src="https://cws.auckland.ac.nz/335a3/api/GetLogo" alt="SHITlogo" width="10%" height="10%">
+				<img src="https://cws.auckland.ac.nz/335a3/api/GetLogo" alt="SHITlogo" width="200px" height="200px">
 				<div class="intro">
 						<h1>The Southern Hemisphere Institute of Technology</h1>
 						<aside>Insert short introduction here.</aside>
 				</div>
 		</header>
-
-		<br>
 		
+		<br>
+	
 		<div class="navbar">
 				<button onclick="hideDiv(homeWrapper)">Home</button>
 				<button onclick="hideDiv(staffWrapper)">Staff</button>
@@ -30,13 +30,28 @@
 		
 		<div id="homeWrapper">
 			<h1>Home</h1>
-			<p>Southern Hemisphere Institute of Technology is a premiere establishment providing world-class higher education right here in New Zealand. 
-			They take pride in what they do to the community at large.</p>
+			<p style="max-width: 850px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis mauris in lectus aliquam lobortis id eget ligula. 
+				Fusce ornare urna non tempus tempor. Sed et nibh id sapien aliquam lobortis ut vitae sem. Quisque facilisis ipsum eu enim dictum hendrerit. 
+				Nam nunc arcu, feugiat vitae magna vitae, molestie consectetur mi. Etiam tincidunt lectus augue, at venenatis ligula interdum non. Aenean at aliquet erat. 
+				Suspendisse auctor lorem id mauris semper, a ullamcorper enim scelerisque. Quisque vel sodales urna, nec ultricies risus.</p>
+
+			<p style="max-width: 850px;">Yo mamma ipsum dolor bling bling amizzle, crunk adipiscing elit. Nullizzle check it out velit, dope brizzle, 
+				check out this quizzle, phat vel, arcu. Pellentesque egizzle ma nizzle. Sed erizzle. Shizzle my nizzle crocodizzle own yo' dolor dapibus turpis tempizzle brizzle. 
+				Maurizzle pellentesque boofron yippiyo turpis. I'm in the shizzle izzle tortor. Pellentesque crackalackin you son of a bizzle fizzle. 
+				In boom shackalack its fo rizzle yippiyo crunk. Shut the shizzle up dapibizzle. Ass tellus mammasay mammasa mamma oo sa, pretizzle my shizz, mattizzle brizzle, 
+				eleifend vitae, nunc. Tellivizzle suscipizzle. Fizzle sempizzle velit sizzle .</p>
 		</div>
 
 		<div id="staffWrapper" style="display: none;">
 			<h1>Staff</h1>
-			<button onclick="getAllStaff()">Get All Staff</button>
+			<button onclick="getDisplayedStaff()">Get All Staff</button>
+			<div id="staffList">
+
+				<div class="staffItem">
+
+				</div>
+
+			</div>
 		</div>
 
 		<div id="instituteShopWrapper" style="display: none;">
