@@ -14,6 +14,19 @@ const hideDiv =(divID) => {
 	x.style.display = "block";
 }
 
+async function sendComment() {
+	const data = {"comment": "test comment body2", "name": "Pinghang2"};
+	fetch("http://localhost:5000/api/WriteComment", {
+		headers: {"Content-Type": "application/json"},
+		method: "POST",
+		body: JSON.stringify(data)
+	}).then(res => {
+		alert("Comment Posted!");
+		document.getElementById("com").src = document.getElementById("com").src;
+	})
+
+}
+
 async function getDisplayedStaff() {
 
 	const createStaff = (parent, vccc) => {
@@ -66,29 +79,23 @@ async function getDisplayedStaff() {
 		return [fullName, phoneNumber, email, interest, photo];
 	}
 
+	async function fetchCards(parent, data) {
+		for (let i = 0; i < data.length; i++){
+			await fetch(`http://localhost:5000/api/GetCard/${data[i].id}`, {})
+			.then(response => response.text())
+			.then(data => {
+				const vccc = vCardFormatter(data)
+				createStaff(parent, vccc);
+			});
+		}
+	}
+
 	fetch('http://localhost:5000/api/GetAllStaff')
 		.then(response => response.json())
 		.then(data => {
 			const parent = document.getElementById("staffList");
 			console.log(data);
-
-			for (let i = 0; i < data.length; i++){
-				fetch(`http://localhost:5000/api/GetCard/${data[i].id}`, {})
-				.then(response => response.text())
-				.then(data => {
-					const vccc = vCardFormatter(data)
-					createStaff(parent, vccc);
-				});
-			}
-
-			/*
-			fetch('http://localhost:5000/api/GetCard/7247480', {})
-				.then(response => response.text())
-				.then(data => {
-					const vccc = vCardFormatter(data)
-					createStaff(parent, vccc);
-				});
-			*/
+			fetchCards(parent, data);
 		});
 }
-//https://cws.auckland.ac.nz/335a3/api/GetCard/${data[i].id}
+//https://cws.auckland.ac.nz/335a3/api/GetCard/${data[i].id} http://localhost:5000/api/GetCard/7247480
