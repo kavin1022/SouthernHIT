@@ -32,3 +32,9 @@ html{
     width: 150px;
     margin-right: 20px;
 }
+
+#writeCommentArea{
+    width: 650px;
+    display: flex;
+    flex-direction: column;
+}

@@ -15,7 +15,15 @@ const hideDiv =(divID) => {
 }
 
 async function sendComment() {
-	const data = {"comment": "test comment body2", "name": "Pinghang2"};
+	const name = document.getElementById("commentName").value;
+	const body = document.getElementById("commentBody").value;
+
+	if (name == "" || body == ""){
+		alert("Comment name and body cannot be empty!");
+		return;
+	}
+
+	const data = {"comment": name, "name": body};
 	fetch("http://localhost:5000/api/WriteComment", {
 		headers: {"Content-Type": "application/json"},
 		method: "POST",
