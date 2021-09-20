@@ -7,28 +7,35 @@
 
 	<title>Southern Hemisphere Institute of Technology</title>
 	<link rel="stylesheet" href="pfan450.css">
+	<link rel="icon" href="http://localhost:5000/logo-192x192.png">
 </head>
 
 <body>	
 		<header>
-				<img src="https://cws.auckland.ac.nz/335a3/api/GetLogo" alt="SHITlogo" width="200px" height="200px">
+				<img src="http://localhost:5000/api/GetLogo" alt="SHITlogo" width="200px" height="200px">
 				<div class="intro">
 						<h1>The Southern Hemisphere Institute of Technology</h1>
-						<aside>Insert short introduction here.</aside>
+						<div style="display: flex; justify-content: space-between;">
+							<aside>Insert short introduction here.</aside>
+							<div id="loginDisplay">User not Logged in</div>
+						</div>
 				</div>
+				
 		</header>
 		
 		<br>
-	
 		<div class="navbar">
-				<button onclick="hideDiv(homeWrapper)">Home</button>
-				<button onclick="hideDiv(staffWrapper)">Staff</button>
-				<button onclick="hideDiv(instituteShopWrapper)">Institute Shop</button>
-				<button onclick="hideDiv(userRegWrapper)">User Registration</button>
-				<button onclick="hideDiv(guestBookWrapper)">Guest Book</button>
+				<div>
+					<button onclick="hideDiv(homeWrapper)">Home</button>
+					<button onclick="hideDiv(staffWrapper)">Staff</button>
+					<button onclick="hideDiv(instituteShopWrapper)">Institute Shop</button>
+					<button onclick="hideDiv(userRegWrapper)">User Registration</button>
+					<button onclick="hideDiv(guestBookWrapper)">Guest Book</button>
+				</div>
+				
 		</div>
 		
-		<div id="homeWrapper">
+		<div id="homeWrapper" style="display: none;">
 			<h1>Home</h1>
 			<p style="max-width: 850px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis mauris in lectus aliquam lobortis id eget ligula. 
 				Fusce ornare urna non tempus tempor. Sed et nibh id sapien aliquam lobortis ut vitae sem. Quisque facilisis ipsum eu enim dictum hendrerit. 
@@ -42,6 +49,8 @@
 				eleifend vitae, nunc. Tellivizzle suscipizzle. Fizzle sempizzle velit sizzle .</p>
 		</div>
 
+		<button onclick="triggerLogin()">Sign in</button>
+
 		<div id="staffWrapper" style="display: none;">
 			<h1>Staff</h1>
 			<button onclick="getDisplayedStaff()">Get All Staff</button>
@@ -54,12 +63,34 @@
 			</div>
 		</div>
 
-		<div id="instituteShopWrapper" style="display: none;">
+		<div id="instituteShopWrapper">
 			<h1>Institute Shop</h1>
+			<input id="itemSearchBar" class="itemSearchBar" oninput="searchItems(itemSearchBar)" width="500px" placeholder="Filter Items" style="width: 500px;"></input>
+
+			<div id="shopItemsWrapper">
+
+			</div>
+		</div>
+
+		<div id="loginSectionWrapper" style="display: none;">
+			<h1>User Login</h1>
+			<div id="loginWrapper">
+				<input id= "loginUsername" type="text" style="width: 200px; margin-bottom: 20px;" placeholder="User Name">
+				<input id= "loginPassword" type="password" style="width: 200px; margin-bottom: 20px;" placeholder="Password">
+			</div>
+			<p id="loginMessage"></p>
+			<button onclick="loginAccount()">Log In</button>
 		</div>
 
 		<div id="userRegWrapper" style="display: none;">
 			<h1>User Registration</h1>
+			<div id="registerWrapper">
+				<input id= "username" type="text" style="width: 200px; margin-bottom: 20px;" placeholder="User Name">
+				<input id= "password" type="password" style="width: 200px; margin-bottom: 20px;" placeholder="Password">
+				<input id= "address" type="text" style="width: 200px; margin-bottom: 20px;" placeholder="Address">
+			</div>
+			<button onclick="registerAccount()">Register</button>
+			<p id="resigerStatus">Click Register Button to Register</p>
 		</div>
 
 		<div id="guestBookWrapper" style="display: none;">
@@ -72,7 +103,7 @@
 			<button onclick="sendComment()">Post Comment</button>
 
 			<h2>Recent Entries</h2>
-			<iframe id="com" src="http://localhost:5000/api/GetComments" style="width: 650px; height: 400px;"></iframe>
+			<iframe id="com" src="http://localhost:5000/api/GetComments" style="width: 650px; max-width: 90%; height: 400px;"></iframe>
 		</div>
 
 	<script src="pfan450.js"></script>

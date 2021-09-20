@@ -3,8 +3,9 @@
 }
 
 .navbar{
+    display: flex;
     justify-content: space-evenly;
-    width: 50vw;
+    width: fit-content;
 }
 
 body{
@@ -37,4 +38,39 @@ html{
     width: 650px;
     display: flex;
     flex-direction: column;
+    max-width: 90%;
+}
+
+#registerWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+#loginWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+#loginDisplay{
+    border: 1px black solid;
+    width: fit-content;
+    padding: 5px;
+}
+
+#shopItemsWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.shopItems{
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.itemPhoto{
+    size: 30%;
+    max-width: 400px;
+    max-height: 400px;
+    margin-right: 20px;
 }
