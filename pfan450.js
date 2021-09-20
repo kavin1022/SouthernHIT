@@ -143,8 +143,9 @@ const getDisplayedStaff = async() => {
 		let div = document.createElement("div");
 		let textDiv = document.createElement("div");
 		let name = document.createElement("p");
-		let phone = document.createElement("p");
-		let email = document.createElement("p");
+		let phoneWrapper = document.createElement("p");
+		let phone = document.createElement("a");
+		let email = document.createElement("a");
 		let interest = document.createElement("p");
 		let img = document.createElement("img");
 
@@ -156,11 +157,15 @@ const getDisplayedStaff = async() => {
 
 		name.appendChild(nameContent);
 		phone.appendChild(phoneContent);
+		phone.href="tel:" + vccc[1];
 		email.appendChild(emailContent);
+		email.href="mailto:" + vccc[2];
 		interest.appendChild(interestContent);
 
+		phoneWrapper.appendChild(phone);
+
 		textDiv.appendChild(name);
-		textDiv.appendChild(phone);
+		textDiv.appendChild(phoneWrapper);
 		textDiv.appendChild(email);
 		textDiv.appendChild(interest);
 
