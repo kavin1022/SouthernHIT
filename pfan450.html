@@ -10,14 +10,14 @@
 	<link rel="icon" href="http://localhost:5000/logo-192x192.png">
 </head>
 
-<body>	
+<body  onload="searchItems(itemSearchBar)">	
 		<header>
 				<img src="http://localhost:5000/api/GetLogo" alt="SHITlogo" width="200px" height="200px">
 				<div class="intro">
 						<h1>The Southern Hemisphere Institute of Technology</h1>
 						<div style="display: flex; justify-content: space-between;">
 							<aside>Insert short introduction here.</aside>
-							<div id="loginDisplay">User not Logged in</div>
+							<div id="loginDisplay" onclick="triggerLogin(loginDisplay)" style="cursor: pointer;">User not Logged in, click here to log in</div>
 						</div>
 				</div>
 				
@@ -49,11 +49,11 @@
 				eleifend vitae, nunc. Tellivizzle suscipizzle. Fizzle sempizzle velit sizzle .</p>
 		</div>
 
-		<button onclick="triggerLogin()">Sign in</button>
+		<!--<button onclick="triggerLogin()">Sign in</button>-->
 
 		<div id="staffWrapper" style="display: none;">
 			<h1>Staff</h1>
-			<button onclick="getDisplayedStaff()">Get All Staff</button>
+			<!--<button onclick="getDisplayedStaff()">Get All Staff</button>-->
 			<div id="staffList">
 
 				<div class="staffItem">
@@ -65,7 +65,7 @@
 
 		<div id="instituteShopWrapper" style="display: none;">
 			<h1>Institute Shop</h1>
-			<input id="itemSearchBar" class="itemSearchBar" oninput="searchItems(itemSearchBar)" width="500px" placeholder="Filter Items" style="width: 500px;"></input>
+			<input id="itemSearchBar" class="itemSearchBar" oninput="searchItems(itemSearchBar)" style="width: 70%;" placeholder="Filter Items"></input>
 
 			<div id="shopItemsWrapper">
 

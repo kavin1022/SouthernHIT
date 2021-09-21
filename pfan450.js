@@ -17,6 +17,14 @@ const hideDiv = (divID) => {
 		y.style.display = "none";
 	}
 
+	if (divID.id == "instituteShopWrapper" || divID.id == "staffWrapper"){
+		if(divID.id == "staffWrapper" && staffLoaded == false){
+			console.log("test");
+			getDisplayedStaff();
+		}
+		x.style.display = "flex";
+		return;
+	}
 	x.style.display = "block";
 }
 
@@ -24,11 +32,18 @@ const storeUserDetail = (username, password) => {
 	globalUsername = username;
 	globalPassword = password;
 	loginStatus = true;
-	document.getElementById("loginDisplay").innerHTML = username;
+	document.getElementById("loginDisplay").innerHTML = "Hello, " + username + ", click here to log out";
 }
 
-const triggerLogin = () => {
-	hideDiv("loginSectionWrapper");
+const triggerLogin = (div) => {
+	if (loginStatus == false) hideDiv("loginSectionWrapper");
+	else {
+		loginStatus = false;
+		globalPassword = null;
+		globalUsername = null;
+		div.innerHTML = "User not Logged in, click here to log in";
+		hideDiv(homeWrapper)
+	}
 }
 
 const loginAccount = async () => {
@@ -61,6 +76,7 @@ const loginAccount = async () => {
 		}
 	});
 }
+
 const purchaseItem = (id) => {
 	if (loginStatus == false){
 		hideDiv("loginSectionWrapper");
@@ -83,6 +99,7 @@ const purchaseItem = (id) => {
 		}
 	});
 }
+
 //Shop
 const searchItems = async(e) => {
 	const parent = document.getElementById("shopItemsWrapper")
@@ -95,11 +112,13 @@ const searchItems = async(e) => {
 		let itemTitle = document.createElement("h3");
 		let description = document.createElement("p");
 		let price = document.createElement("p");
-		let img = document.createElement("img");
+		
 
 		itemTitle.appendChild(document.createTextNode(data.name));
 		description.appendChild(document.createTextNode(data.description));
 		price.appendChild(document.createTextNode("$" + data.price));
+		
+		let img = document.createElement("img");
 		img.src = "http://localhost:5000/api/GetItemPhoto/" + data.id;
 
 		textdiv.appendChild(itemTitle);
@@ -120,8 +139,6 @@ const searchItems = async(e) => {
 
 	};
 
-
-
 	const searchItemInput = document.getElementById("itemSearchBar");
 	fetch("http://localhost:5000/api/GetItems/" + searchItemInput.value, {
 		headers: {"Content-Type": "application/json"},
@@ -138,18 +155,18 @@ const searchItems = async(e) => {
 //Staff
 const getDisplayedStaff = async() => {
 
-	const createStaff = (parent, vccc) => {
+	const createStaff = (parent, vccc, id) => {
 
 		let div = document.createElement("div");
 		let textDiv = document.createElement("div");
-		let name = document.createElement("p");
+		let name = document.createElement("a");
 		let phoneWrapper = document.createElement("p");
 		let phone = document.createElement("a");
 		let email = document.createElement("a");
 		let interest = document.createElement("p");
 		let img = document.createElement("img");
 
-		let nameContent = document.createTextNode(vccc[0]);
+		let nameContent = document.createTextNode(vccc[0] + " (Click to add to Local Contact)");
 		let phoneContent = document.createTextNode(vccc[1]);
 		let emailContent = document.createTextNode(vccc[2]);
 		let interestContent = document.createTextNode(vccc[3]);
@@ -161,6 +178,8 @@ const getDisplayedStaff = async() => {
 		email.appendChild(emailContent);
 		email.href="mailto:" + vccc[2];
 		interest.appendChild(interestContent);
+
+		name.href = "http://localhost:5000/api/GetCard/" + id;
 
 		phoneWrapper.appendChild(phone);
 
@@ -195,11 +214,13 @@ const getDisplayedStaff = async() => {
 
 	async function fetchCards(parent, data) {
 		for (let i = 0; i < data.length; i++){
+			let id = data[i].id;
 			await fetch(`http://localhost:5000/api/GetCard/${data[i].id}`, {})
 			.then(response => response.text())
 			.then(data => {
 				const vccc = vCardFormatter(data)
-				createStaff(parent, vccc);
+				console.log(id);
+				createStaff(parent, vccc, id);
 			});
 		}
 	}
@@ -255,6 +276,7 @@ const sendComment = async() => {
 
 let loginStatus = false;
 let globalUsername, globalPassword;
+let staffLoaded = false;
 
 
 //enter key triggers login function
