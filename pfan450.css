@@ -48,14 +48,14 @@ html{
     display: flex;
     flex-direction: row;
     align-items: center;
-    max-width: 600px;
-    width: 50%;
+    max-width: 1000px;
+    width: 60%;
     justify-content: center;
     margin-bottom: 40px;
 }
 
 .staffImage{
-    max-width: 80%;
+    max-width: 50%;
     margin-right: 20px;
 }
 
@@ -64,6 +64,10 @@ html{
     display: flex;
     flex-direction: column;
     max-width: 90%;
+}
+
+.contactButton{
+    margin-left: 5px;
 }
 
 #registerWrapper{

@@ -165,13 +165,14 @@ const getDisplayedStaff = async() => {
 		let email = document.createElement("a");
 		let interest = document.createElement("p");
 		let img = document.createElement("img");
+		
 
-		let nameContent = document.createTextNode(vccc[0] + " (Click to add to Local Contact)");
+		let nameContent = document.createTextNode(vccc[0]);
 		let phoneContent = document.createTextNode(vccc[1]);
 		let emailContent = document.createTextNode(vccc[2]);
 		let interestContent = document.createTextNode(vccc[3]);
-		img.src = "data:image/png;base64, " + vccc[4];
-
+		//img.src = "data:image/png;base64, " + vccc[4];
+		img.src = "http://localhost:5000/api/GetStaffPhoto/" + id;
 		name.appendChild(nameContent);
 		phone.appendChild(phoneContent);
 		phone.href="tel:" + vccc[1];
@@ -183,7 +184,14 @@ const getDisplayedStaff = async() => {
 
 		phoneWrapper.appendChild(phone);
 
+		let button = document.createElement("button");
+		button.className = "contactButton";
+		let buttonContent = document.createTextNode("Add to Contact");
+		button.onclick = () => window.open("http://localhost:5000/api/GetCard/" + id);
+		button.appendChild(buttonContent);
+
 		textDiv.appendChild(name);
+		textDiv.appendChild(button);
 		textDiv.appendChild(phoneWrapper);
 		textDiv.appendChild(email);
 		textDiv.appendChild(interest);
@@ -197,11 +205,11 @@ const getDisplayedStaff = async() => {
 		parent.appendChild(div);
 	}
 
-	const vCardFormatter = (vcard) => {
+	const vCardReader = (vcard) => {
 		const fullName = vcard.slice(vcard.search("FN:") + 3, vcard.search("UID:") - 1);
 		const phoneNumber = vcard.slice(vcard.search("TEL:") + 4, vcard.search("URL:") - 1);
 		const email = vcard.slice(vcard.search("EMAIL;") + 16, vcard.search("TEL:") - 1);
-		const interest = vcard.slice(vcard.search("CATEGORIES:") + 11, vcard.search("PHOTO") - 1);
+		const interest = vcard.slice(vcard.search("CATEGORIES:") + 11, vcard.search("PHOTO") - 10);
 
 		const i = vcard.indexOf("PHOTO;");
 		const mark = vcard.indexOf(":", i)
@@ -215,11 +223,10 @@ const getDisplayedStaff = async() => {
 	async function fetchCards(parent, data) {
 		for (let i = 0; i < data.length; i++){
 			let id = data[i].id;
-			await fetch(`http://localhost:5000/api/GetCard/${data[i].id}`, {})
+			await fetch(`http://localhost:5000/api/GetCard/${data[i].id}`)
 			.then(response => response.text())
 			.then(data => {
-				const vccc = vCardFormatter(data)
-				console.log(id);
+				const vccc = vCardReader(data)
 				createStaff(parent, vccc, id);
 			});
 		}
