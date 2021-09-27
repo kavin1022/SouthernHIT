@@ -180,8 +180,8 @@ const getDisplayedStaff = async() => {
 		email.href="mailto:" + vccc[2];
 		interest.appendChild(interestContent);
 
-		name.href = "http://localhost:5000/api/GetCard/" + id;
-
+		name.href = "http://" + vccc[5];
+		console.log(name.href)
 		phoneWrapper.appendChild(phone);
 
 		let button = document.createElement("button");
@@ -209,7 +209,8 @@ const getDisplayedStaff = async() => {
 		const fullName = vcard.slice(vcard.search("FN:") + 3, vcard.search("UID:") - 1);
 		const phoneNumber = vcard.slice(vcard.search("TEL:") + 4, vcard.search("URL:") - 1);
 		const email = vcard.slice(vcard.search("EMAIL;") + 16, vcard.search("TEL:") - 1);
-		const interest = vcard.slice(vcard.search("CATEGORIES:") + 11, vcard.search("PHOTO") - 10);
+		const interest = vcard.slice(vcard.search("CATEGORIES:") + 11, vcard.search("PHOTO") - 1);
+		const url = vcard.slice(vcard.search("URL:") + 11, vcard.search("CATEGORIES") - 10);
 
 		const i = vcard.indexOf("PHOTO;");
 		const mark = vcard.indexOf(":", i)
@@ -217,7 +218,7 @@ const getDisplayedStaff = async() => {
 
 		const photo = vcard.substring(mark + 1, j);
 
-		return [fullName, phoneNumber, email, interest, photo];
+		return [fullName, phoneNumber, email, interest, photo, url];
 	}
 
 	async function fetchCards(parent, data) {
